@@ -89,22 +89,6 @@ def predict(theta, X, P):
     return forward(theta, X, P)[2].argmax(1)   # MAP decision on model posteriors
  
  
-# # ------------------------------------------------------------------
-# # 3. Sanity checks on the software
-# # ------------------------------------------------------------------
-# def sanity_checks():
-#     Xs, ys = generate(50)
-#     Y1h = np.eye(C)[ys]
-#     for P in (1, 5):
-#         th = rng.normal(0, 0.5, n_params(P))
-#         err = check_grad(lambda t: loss_grad(t, Xs, Y1h, P)[0],
-#                          lambda t: loss_grad(t, Xs, Y1h, P)[1], th)
-#         print(f"  gradient check P={P}: ||analytic - numeric|| = {err:.2e}")
-#     th = rng.normal(0, 0.5, n_params(3))
-#     p = np.exp(forward(th, Xs, 3)[2])
-#     print(f"  softmax outputs sum to 1: max|sum-1| = {np.abs(p.sum(1) - 1).max():.1e}")
- 
- 
 #**************** Question 1 10-Fold Cross Validation ********
 P_CANDIDATES = [1, 2, 3, 4, 6, 8, 12, 16, 24, 32]
 K_FOLDS = 10
@@ -130,8 +114,6 @@ def cross_validate(X, y, cv_restarts=2, cv_maxiter=500):
  
 
 if __name__ == "__main__":
-    # print("Sanity checks:")
-    # sanity_checks()
  
     N_TRAIN = [100, 500, 1000, 5000, 10000]
     train_sets = {N: generate(N) for N in N_TRAIN}
